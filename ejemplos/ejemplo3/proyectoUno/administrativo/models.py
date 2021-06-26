@@ -18,6 +18,19 @@ class Estudiante(models.Model):
         valor = [t.costo_plan for t in self.numeros_telefonicos.all()]
         valor = sum(valor)
         return valor
+    def obtener_cantidad_telefonos(self):
+        valor = len(self.numeros_telefonicos.all())
+        return valor
+        
+        '''
+        SEGUNDA FORMA DEL FOR anterior
+        valor =0 ;
+        # self.num_telefonicos -> me devuelve un listado de obj de tipo NumeroTelefonico
+        for t in self.num_telefonico.all();
+            valor = valor + t.costo_plan
+        return valor
+
+        '''
 
 class NumeroTelefonico(models.Model):
     telefono = models.CharField(max_length=100)

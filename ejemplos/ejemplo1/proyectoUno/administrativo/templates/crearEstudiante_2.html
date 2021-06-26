@@ -6,7 +6,8 @@
 <form action="" method="post">
 
   {% csrf_token %}
-
+  <!--Desagregar-->
+  <!--Llamar a los errores posibles que pueda tener-->
   {{ formulario.non_field_errors }}
   <div class="fieldWrapper">
     {{ formulario.nombre.errors }}
