@@ -1,5 +1,8 @@
 {% extends "master.html" %}
 
+{% block title %}
+  Crear departamento
+{% endblock %}
 {% block content %}
 
 <h2>Crear Departamento</h3>
@@ -12,14 +15,12 @@
           <div class='column'>
             <div class='izquierda-column'>
               <div class="fieldWrapper">
-                {{ formulario.nombre.errors }}
+                {{ formulario.nombre_propietario.errors }}
                 <label for="{{ formulario.nombre_propietario.id_for_label }}">Nombre completo del Propietario: </label>
                 {{ formulario.nombre_propietario }}
               </div>
                 <br>
               <div class="fieldWrapper">
-                {{ formulario.non_field_errors }}
-                <!--SEGUNDO-->
                 {{ formulario.costo.errors }}
                 <label for="{{ formulario.costo.id_for_label }}">Ingrese el costo: </label>
                 {{ formulario.costo }}
@@ -29,7 +30,7 @@
           <div class='column'>
             <div class='derecha-column'>
               <div class="fieldWrapper">
-                {{ formulario.tipo.errors }}
+                {{ formulario.numero_cuartos.errors }}
                 <label for="{{ formulario.numero_cuartos.id_for_label }}">Ingrese número cuartos: </label>
                 {{ formulario.numero_cuartos }}
               </div>
@@ -43,7 +44,7 @@
           </div>
         </div>
       </div>
-
+      <br>
       <div><input type='submit' value='Agregar'/></div>
       <br>
       <hr>

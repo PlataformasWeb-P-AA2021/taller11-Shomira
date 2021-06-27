@@ -25,10 +25,16 @@ th, td {
     padding: 15px;
     border-bottom: 1px solid black;
 }
-  
-tr:hover {
-    background-color: #25ad4e;
+thead{
+    background-color: #ccc097;
+    border-bottom: 3px solid rgb(66, 55, 38);
 }
+tr:hover {
+    background-color: #a59a7d;
+}
+tr:nth-child(even) {
+    background-color: #753b3b;
+  }
 
 .contenido{
     margin: 2em;

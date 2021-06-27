@@ -1,7 +1,10 @@
 {% extends "master.html" %}
 
+{% block title %}
+  Crear departamento edificio
+{% endblock %}
 {% block content %}
-<h2>Crear Departamento para {{edificio}}</h3>
+<h2>Crear Departamento para  {{edificio}}</h3>
 
 <form action="" method="post">
   {% csrf_token %}

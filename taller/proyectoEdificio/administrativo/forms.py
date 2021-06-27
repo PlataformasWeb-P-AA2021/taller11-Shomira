@@ -17,10 +17,14 @@ class EdificioForm(ModelForm):
             'tipo': _('Ingrese el tipo de edificio'),
 
         }
+    #El nombre de la ciudad no puede iniciar con la letra mayúscula L
+    def clean_ciudad(self):
+        valor = self.cleaned_data['ciudad']
+        if valor[0] == "L":
+            raise forms.ValidationError("El nombre NO debe iniciar con L")
+        return valor	
+
     
- 
-    '''Agregar validaciones'''
-    '''El nombre de la ciudad no puede iniciar con la letra mayúscula L'''
 
 class DepartamentoForm(ModelForm):
     class Meta:
@@ -31,15 +35,32 @@ class DepartamentoForm(ModelForm):
                 'costo': _('Ingrese el costo por favor'),
                 'numero_cuartos': _('Ingrese el numero de cuartos por favor'),
                 'edificio': _('Elija un edificio'),
-    
-
             }
+    #Validaciones
+    #El nombre completo de un propietario no debe tener menos de 3 palabras.
+    def clean_nombre_propietario(self):
+        nombre = self.cleaned_data['nombre_propietario']
+        num_palabras = len(nombre.split())
+        if num_palabras < 3:
+            raise forms.ValidationError("Ingrese los nombres completos porfavor")
+        return nombre
+        
     #Costo de un departamento no puede ser mayor a $100 mil.
     def clean_costo(self):
         valor = self.cleaned_data['costo']
-        if valor > 100:
-            raise forms.ValidationError("Costo Excesivo")
+        if valor > 1000000:
+            raise forms.ValidationError("Costo Excesivo. Supera el limite de 100000.")
         return valor	
+
+    #Número de cuartos no puede ser 0, ni mayor a 7
+    def clean_numero_cuartos(self):
+        num = self.cleaned_data['numero_cuartos']
+        if num == 0 or num > 7:
+            raise forms.ValidationError(" NO debe ser 0 ni mayor a 7")
+        return num
+
+    
+
 class EdificioDepartamentoForm(ModelForm): 
    
     #args tupla de opciones **kwarsg diccionario
@@ -61,5 +82,28 @@ class EdificioDepartamentoForm(ModelForm):
         model = Departamento 
         fields = ['nombre_propietario','costo','numero_cuartos', 'edificio'] 
 
+    # Validaciones cuando se quiera agregar desde la tabla  del index 
 
+    #El nombre completo de un propietario no debe tener menos de 3 palabras.
+    def clean_nombre_propietario(self):
+        nombre = self.cleaned_data['nombre_propietario']
+        num_palabras = len(nombre.split())
+        if num_palabras < 3:
+            raise forms.ValidationError("Ingrese los nombres completos porfavor")
+        return nombre
 
+    #Costo de un departamento no puede ser mayor a $100 mil.
+    def clean_costo(self):
+        valor = self.cleaned_data['costo']
+        if valor > 1000000:
+            raise forms.ValidationError("Costo Excesivo")
+        return valor	
+
+    #Número de cuartos no puede ser 0, ni mayor a 7
+    def clean_numero_cuartos(self):
+        num = self.cleaned_data['numero_cuartos']
+        if num== 0 or num > 7:
+            raise forms.ValidationError("Número de cuartos erroneo")
+        return num	
+
+    
